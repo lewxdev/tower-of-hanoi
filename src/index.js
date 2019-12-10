@@ -17,19 +17,20 @@ function startNewGame(numOfDisks) {
 
 document.querySelectorAll(".set").forEach(setBox => {
 	setBox.onclick = function () {
+		const selectedDisk = document.querySelector(".selected")
 		if (!document.querySelector(".selected"))		
 			this.lastElementChild.classList.add("selected")
 		else {
-			const selectedDisk = document.querySelector(".selected")
-			selectedDisk.remove()
-			this.appendChild(selectedDisk)
-		
-			this.lastElementChild.classList.remove("selected")
+			if (this.innerHTML == "" || this.lastElementChild.clientWidth > selectedDisk.clientWidth) {
+				selectedDisk.remove()
+				this.appendChild(selectedDisk)
+				this.lastElementChild.classList.remove("selected")
+			}
 		}
 	}
 })
 
-startNewGame(5)
+startNewGame(4)
 
 // document.querySelectorAll(".set").forEach(setBox => {
 // 	setBox.onclick = function () {
