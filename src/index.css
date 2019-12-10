@@ -1,0 +1,51 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main.content-container {
+	display: flex;
+	width: 450px;
+	justify-content: space-around;
+}
+
+.set {
+	height: fit-content;
+	width: 100px;
+	border-bottom: solid #000 2px;
+	border-radius: 3.125px;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	padding: 7px 0;
+}
+
+.set:hover {
+	background: #00000010;
+}
+
+.set.moveable:hover {
+	background: #00000025;
+	cursor: pointer;
+}
+
+.disk {
+	height: 20px;
+	width: 100%;
+	margin-top: 5px;
+	background-color: #f17e48;
+	background-image: linear-gradient(45deg, #00000020 60%, #00000000 60%);
+	border-radius: 6.25px;
+	box-shadow: inset 2.5px 4px #00000080;
+}
+
+.disk.selected {
+	border: dashed 2px #000;
+	background: none;
+	box-shadow: none;
+	height: 16px;
+}
