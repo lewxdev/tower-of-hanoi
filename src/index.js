@@ -34,9 +34,15 @@ function startNewGame(numOfDisks) {
 			// IF end set contains all disks
 			if (endSet.childElementCount === numOfDisks) {
 				alert("You Win!")
-				if (confirm("Play again?"))
-					startNewGame(numOfDisks)
+				Array.from(endSet.childNodes).forEach(disk => {
+					disk.remove()
+					startSet.appendChild(disk)
+				})
 			}
+
+			// IF start set contains all disks
+			if (startSet.childElementCount === numOfDisks)
+				infoMoves.textContent = 0
 		}
 
 		setBox.innerHTML = ""
