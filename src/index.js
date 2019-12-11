@@ -2,12 +2,9 @@ const infoMoves = document.querySelector(".info .moves span")
 const infoDisks = document.querySelector(".info .disks span")
 
 function startNewGame(numOfDisks) {
-	const sets = document.querySelectorAll(".set")
-	const startSet = document.querySelector(".set#start")
-	const endSet = document.querySelector(".set#end")
-
-	sets.forEach((setBox, index) => {
+	document.querySelectorAll(".set").forEach((setBox, index) => {
 		function moveAction() {
+			console.log("bang")
 			const selectedDisk = document.querySelector(".selected")
 			const topDisk = setBox.lastElementChild
 
@@ -20,7 +17,7 @@ function startNewGame(numOfDisks) {
 				// -- [second click]
 			} else {
 				// IF disk is being dropped (in an empty set/topDisk is bigger than selected)
-				if (!topDisk || topDisk.dataset.index > selectedDisk.dataset.index) {
+				if (!topDisk || topDisk.dataset.size > selectedDisk.dataset.size) {
 					selectedDisk.remove()
 					setBox.appendChild(selectedDisk)
 					selectedDisk.classList.remove("selected")
@@ -32,38 +29,41 @@ function startNewGame(numOfDisks) {
 			}
 
 			// IF end set contains all disks
-			if (endSet.childElementCount === numOfDisks) {
+			if (document.querySelector(".set#end").childElementCount === numOfDisks) {
 				alert("You Win!")
-				Array.from(endSet.childNodes).forEach(disk => {
+				Array.from(document.querySelector(".set#end").childNodes).forEach(disk => {
 					disk.remove()
-					startSet.appendChild(disk)
+					document.querySelector(".set#start").appendChild(disk)
 				})
 			}
 
 			// IF start set contains all disks
-			if (startSet.childElementCount === numOfDisks)
+			if (document.querySelector(".set#start").childElementCount === numOfDisks)
 				infoMoves.textContent = 0
 		}
 
-		setBox.innerHTML = ""
+		setBox.innerHTML = null
 		setBox.style.height = null
-		setBox.addEventListener("click", moveAction)
-		document.body.addEventListener("keyup", (event) => {
-			if (event.keyCode === [49, 50, 51][index])
-				moveAction()
-		})
+
+		setBox.onclick = moveAction
 	})
 
 	for (let index = 0; index < numOfDisks; index++) {
 		let disk = document.createElement("div")
 		disk.classList.add("disk")
-		disk.dataset.index = index
-		disk.style.width = `calc(${20 + ((85 / numOfDisks) * index)}% - 4px)`
+		if (document.body.classList.contains("dark"))
+			disk.classList.add("dark")
+		if (document.querySelector(".icon.hash").classList.contains("show-text"))
+			disk.classList.add("show-text")
 
-		startSet.insertBefore(disk, startSet.firstChild)
+		disk.dataset.size = index
+		disk.innerText = `${index + 1}`
+		disk.style.width = `calc(${20 + ((85 / numOfDisks) * index)}% - calc(4px + 3.33px))`
+
+		document.querySelector(".set#start").insertBefore(disk, document.querySelector(".set#start").firstChild)
 	}
 
-	sets.forEach(setBox => setBox.style.height = `${startSet.clientHeight - 14}px`)
+	document.querySelectorAll(".set").forEach(setBox => setBox.style.height = `${document.querySelector(".set#start").clientHeight - 14}px`)
 
 	infoMoves.textContent = 0
 	infoDisks.textContent = numOfDisks
@@ -75,6 +75,14 @@ document.querySelector("input[type=range]").addEventListener("change", function 
 
 document.querySelector("input[type=range]").addEventListener("input", function () {
 	infoDisks.textContent = this.value
+})
+
+document.querySelector(".icon.moon").addEventListener("click", function () {
+	document.querySelectorAll("body, .disk").forEach(element => element.classList.toggle("dark"))
+})
+
+document.querySelector(".icon.hash").addEventListener("click", function () {
+	document.querySelectorAll(".icon.hash, .disk").forEach(element => element.classList.toggle("show-text"))
 })
 
 startNewGame(4)

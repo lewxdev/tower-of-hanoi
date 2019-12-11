@@ -5,6 +5,11 @@
 	--dark-gray: #3a3a3a;
 }
 
+.dark {
+	filter: invert();
+	background: #0e0e0e;
+}
+
 body {
 	font-family: sans-serif;
 	margin: 0;
@@ -46,6 +51,15 @@ main.content-container {
 	border-radius: 6.25px;
 	border: 2px solid var(--dark-gray);
 	box-shadow: inset 10px 15px #00000080;
+	padding-left: 3.33px;
+	color: transparent;
+	font-size: 0.8em;
+	display: flex;
+	align-items: center;
+}
+
+.disk.show-text {
+	color: #fff
 }
 
 .disk.selected {
@@ -55,11 +69,40 @@ main.content-container {
 
 }
 
+.disk.dark {
+	border-color: #ffffff50;
+	filter: invert() brightness(0.8);
+}
+
 .info-options {
 	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
+}
 
+.info-options section {
+	display: flex;
+	position: relative;
+}
+
+.options {
+	display: flex;
+	position: absolute;
+	right: 0;
+}
+
+.options .icon {
+	height: 36px;
+	width: 36px;
+	cursor: pointer;
+}
+
+.icon.moon {
+	background: url("./svg/moon-icon.svg") center/80% no-repeat;
+}
+
+.icon.hash {
+	background: url("./svg/hash-icon.svg") center/80% no-repeat;
 }
 
 input[type=range] {
