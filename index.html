@@ -10,15 +10,18 @@
 </head>
 
 <body>
-	<!-- https://tykhegen_kenzie-projects.gitlab.io/assessments/tower-of-hanoi -->
 	<main class="content-container">
-		<!-- Largest disk is #no_0 and will display first -->
-		<!-- Current container dimensions will hold at most 12 disks -->
-		<!-- Access the default styling for disks via class="disk" -->
 		<section class="set" id="start"></section>
 		<section class="set" id="offset"></section>
 		<section class="set" id="end"></section>
 	</main>
+	<aside class="info-options">
+		<input type="range" min="4" max="12" value="4" />
+		<section class="info">
+			<div class="moves">moves: <span class="count"></span></div>
+			<div class="disks">disks: <span class="count"></span></div>
+		</section>
+	</aside>
 	<script src="./src/index.js"></script>
 </body>
 

@@ -1,23 +1,32 @@
+:root {
+	--content-width: 400px;
+	--set-width: 100px;
+	--disk-color: #8cd1da;
+	--dark-gray: #3a3a3a;
+}
+
 body {
+	font-family: sans-serif;
 	margin: 0;
 	padding: 0;
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	user-select: none;
 }
 
 main.content-container {
 	display: flex;
-	width: 450px;
-	justify-content: space-around;
+	width: var(--content-width);
+	justify-content: space-between;
 }
 
 .set {
 	height: fit-content;
-	width: 100px;
-	border-bottom: solid #000 2px;
-	border-radius: 3.125px;
+	width: var(--set-width);
+	border-bottom: solid var(--dark-gray) 2px;
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: center;
@@ -25,27 +34,56 @@ main.content-container {
 }
 
 .set:hover {
-	background: #00000010;
-}
-
-.set.moveable:hover {
-	background: #00000025;
-	cursor: pointer;
+	background-color: #00000010;
 }
 
 .disk {
 	height: 20px;
 	width: 100%;
 	margin-top: 5px;
-	background-color: #f17e48;
-	background-image: linear-gradient(45deg, #00000020 60%, #00000000 60%);
+	background-color: var(--disk-color);
+	background-image: linear-gradient(45deg, #00000020 60%, #ffffff80 60%);
 	border-radius: 6.25px;
-	box-shadow: inset 2.5px 4px #00000080;
+	border: 2px solid var(--dark-gray);
+	box-shadow: inset 10px 15px #00000080;
 }
 
 .disk.selected {
-	border: dashed 2px #000;
+	border: dashed 2px var(--dark-gray);
 	background: none;
 	box-shadow: none;
-	height: 16px;
+
+}
+
+.info-options {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	height: 2px;
+	width: var(--content-width);
+	background: var(--dark-gray);
+	margin-bottom: 20px;
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	border: solid 2px var(--dark-gray);
+	background-color: #fff;
+	background-image: linear-gradient(45deg, #00000050 50%, #ffffff80 50%);
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+	margin: 0 8px;
 }
