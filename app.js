@@ -5,7 +5,7 @@ var VERSION = "v.1.2"
 var CACHE_NAME = APP_PREFIX + VERSION
 // Add URL you want to cache in this list.
 var URLS = [
-	"/tower-of-hanoi",				// If you have separate JS/CSS files,
+	"/tower-of-hanoi/",				// If you have separate JS/CSS files,
 	"/tower-of-hanoi/index.html",		// add path to those files here
 	"/tower-of-hanoi/src",
 	"/tower-of-hanoi/src/index.css",
