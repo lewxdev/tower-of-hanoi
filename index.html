@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<link rel="stylesheet" href="./src/index.css" />
-	<link rel="canonical" href="https://tykhegen.gitlab.io/tower-of-hanoi/">
+	<link rel="manifest" href="./mainfest.json" />
 	<title>Tower of Hanoi</title>
 </head>
 
@@ -30,7 +30,12 @@
 			</div>
 		</section>
 	</aside>
-	
+
+	<script>
+		if (navigator.serviceWorker) {
+			navigator.serviceWorker.register('/tower-of-hanoi/app.js', { scope: '/tower-of-hanoi/' })
+		}
+	</script>
 	<script src="./src/index.js"></script>
 </body>
 
