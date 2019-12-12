@@ -1,27 +1,27 @@
 // Identifier for this app (this needs to be consistent across every cache update)
 var APP_PREFIX = "Tower-Of-Hanoi_"
 // Version of the off-line cache (change this value everytime you want to update cache)
-var VERSION = "v.1.1"
+var VERSION = "v.1.2"
 var CACHE_NAME = APP_PREFIX + VERSION
 // Add URL you want to cache in this list.
 var URLS = [
-	"/tower-of-hanoi/",				// If you have separate JS/CSS files,
-	"/tower-of-hanoi/index.html",	// add path to those files here
-	"/tower-of-hanoi/src",
-	"/tower-of-hanoi/src/index.css",
-	"/tower-of-hanoi/src/index.js"
+	"./",				// If you have separate JS/CSS files,
+	"./index.html",	// add path to those files here
+	"./src",
+	"./src/index.css",
+	"./src/index.js"
 ]
 
 // Respond with cached resources
 self.addEventListener("fetch", function (event) {
-	console.log("fetch request : " + event.request.url)
+	console.log("fetch request: " + event.request.url)
 	event.respondWith(
 		caches.match(event.request).then(function (request) {
 			if (request) { // if cache is available, respond with cache
-				console.log("responding with cache : " + event.request.url)
+				console.log("responding with cache: " + event.request.url)
 				return request
 			} else {       // if there are no cache, try fetching request
-				console.log("file is not cached, fetching : " + event.request.url)
+				console.log("file is not cached, fetching: " + event.request.url)
 				return fetch(event.request)
 			}
 
@@ -35,7 +35,7 @@ self.addEventListener("fetch", function (event) {
 self.addEventListener("install", function (event) {
 	event.waitUntil(
 		caches.open(CACHE_NAME).then(function (cache) {
-			console.log("installing cache : " + CACHE_NAME)
+			console.log("installing cache: " + CACHE_NAME)
 			return cache.addAll(URLS)
 		})
 	)

@@ -1,5 +1,6 @@
 {
 	"name": "Tower of Hanoi",
+	"short_name": "Hanoi",
 	"icons": [
 		{
 			"src": "src/app/icons/icon_192.png",

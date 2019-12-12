@@ -3,8 +3,10 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="theme-color" content="#fff" />
+	<link rel="apple-touch-icon" href="./src/app/icons/icon_192.png">
 	<link rel="stylesheet" href="./src/index.css" />
 	<link rel="manifest" href="./mainfest.json" />
 	<title>Tower of Hanoi</title>
@@ -33,7 +35,7 @@
 
 	<script>
 		if (navigator.serviceWorker) {
-			navigator.serviceWorker.register('/tower-of-hanoi/app.js', { scope: '/tower-of-hanoi/' })
+			navigator.serviceWorker.register("./app.js", { scope: "./" })
 		}
 	</script>
 	<script src="./src/index.js"></script>
