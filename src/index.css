@@ -1,6 +1,6 @@
 :root {
-	--content-width: 400px;
-	--set-width: 100px;
+	--content-width: 325px;
+	--tower-width: 90px;
 	--disk-color: #8cd1da;
 	--dark-gray: #3a3a3a;
 }
@@ -28,9 +28,9 @@ main.content-container {
 	justify-content: space-between;
 }
 
-.set {
+.tower {
 	height: fit-content;
-	width: var(--set-width);
+	width: var(--tower-width);
 	border-bottom: solid var(--dark-gray) 2px;
 	display: flex;
 	flex-direction: column-reverse;
@@ -38,7 +38,7 @@ main.content-container {
 	padding: 7px 0;
 }
 
-.set:hover {
+.tower:hover {
 	background-color: #00000010;
 }
 

@@ -1,88 +1,90 @@
-const infoMoves = document.querySelector(".info .moves span")
-const infoDisks = document.querySelector(".info .disks span")
+const nodes = {
+	towers: document.querySelectorAll(".tower"),
+	slider: document.querySelector("input[type=range]"),
+	infoText: document.querySelectorAll(".info .text span"),
+	options: document.querySelectorAll(".options .icon")
+}
 
-function startNewGame(numOfDisks) {
-	document.querySelectorAll(".set").forEach((setBox, index) => {
-		function moveAction() {
-			console.log("bang")
-			const selectedDisk = document.querySelector(".selected")
-			const topDisk = setBox.lastElementChild
+function Game(diskCount) {
+	this.diskCount = diskCount
+	this.createStartTower()
+}
 
-			// IF a disk is being picked up (no disk is selected)
-			// -- [first click]
-			if (!selectedDisk) {
-				// IF there is a selectable disk
-				if (topDisk) topDisk.classList.add("selected")
-				// IF a disk has been picked up (a disk is selected)
-				// -- [second click]
-			} else {
-				// IF disk is being dropped (in an empty set/topDisk is bigger than selected)
-				if (!topDisk || topDisk.dataset.size > selectedDisk.dataset.size) {
-					selectedDisk.remove()
-					setBox.appendChild(selectedDisk)
-					selectedDisk.classList.remove("selected")
-					infoMoves.textContent++
-				}
-				// IF selected disk is being dropped in its current set
-				else if (setBox === selectedDisk.parentElement)
-					selectedDisk.classList.remove("selected")
-			}
-
-			// IF end set contains all disks
-			if (document.querySelector(".set#end").childElementCount === numOfDisks) {
-				alert("You Win!")
-				Array.from(document.querySelector(".set#end").childNodes).forEach(disk => {
-					disk.remove()
-					document.querySelector(".set#start").appendChild(disk)
-				})
-			}
-
-			// IF start set contains all disks
-			if (document.querySelector(".set#start").childElementCount === numOfDisks)
-				infoMoves.textContent = 0
-		}
-
-		setBox.innerHTML = null
-		setBox.style.height = null
-
-		setBox.onclick = moveAction
+Game.prototype.createStartTower = function () {
+	nodes.towers.forEach(tower => {
+		tower.innerHTML = null
+		tower.style.height = null
 	})
 
-	for (let index = 0; index < numOfDisks; index++) {
+	for (let index = 0; index < this.diskCount; index++) {
 		let disk = document.createElement("div")
+
 		disk.classList.add("disk")
 		if (document.body.classList.contains("dark"))
 			disk.classList.add("dark")
 		if (document.querySelector(".icon.hash").classList.contains("show-text"))
 			disk.classList.add("show-text")
 
-		disk.dataset.size = index
-		disk.innerText = `${index + 1}`
-		disk.style.width = `calc(${20 + ((85 / numOfDisks) * index)}% - calc(4px + 3.33px))`
+		disk.dataset.size = disk.innerText = `${index + 1}`
+		disk.style.width = `calc(${20 + ((85 / this.diskCount) * index)}% - 7.33px)`
 
-		document.querySelector(".set#start").insertBefore(disk, document.querySelector(".set#start").firstChild)
+		nodes.towers[0].insertBefore(disk, nodes.towers[0].firstChild)
 	}
 
-	document.querySelectorAll(".set").forEach(setBox => setBox.style.height = `${document.querySelector(".set#start").clientHeight - 14}px`)
+	nodes.towers.forEach(tower => {
+		tower.style.height = `${nodes.towers[0].clientHeight - 14}px`
+	})
 
-	infoMoves.textContent = 0
-	infoDisks.textContent = numOfDisks
+	nodes.infoText.forEach((span, index) => {
+		span.textContent = [0, this.diskCount][index]
+	})
 }
 
-document.querySelector("input[type=range]").addEventListener("change", function () {
-	startNewGame(this.value)
+nodes.towers.forEach(tower => {
+	tower.onclick = function () {
+		const diskNodes = {
+			selected: document.querySelector(".selected"),
+			top: tower.lastElementChild,
+			count: parseInt(nodes.infoText[1].textContent)
+		}
+
+		if (!diskNodes.selected) {
+			if (diskNodes.top) diskNodes.top.classList.add("selected")
+		} else {
+			if (!diskNodes.top || diskNodes.top.dataset.size > diskNodes.selected.dataset.size) {
+				diskNodes.selected.remove()
+				tower.appendChild(diskNodes.selected)
+				diskNodes.selected.classList.remove("selected")
+				nodes.infoText[0].textContent++
+			} else if (tower === diskNodes.selected.parentElement)
+				diskNodes.selected.classList.remove("selected")
+		}
+
+		if (nodes.towers[2].childElementCount == diskNodes.count) {
+			alert("You Win!")
+			new Game(diskNodes.count + 1)
+		}
+	}
 })
 
-document.querySelector("input[type=range]").addEventListener("input", function () {
-	infoDisks.textContent = this.value
-})
+document.body.onkeyup = function (event) {
+	nodes.towers.forEach((tower, index) => {
+		if (event.code === ["Digit1", "Digit2", "Digit3"][index])
+			tower.onclick()
+	})
+}
 
-document.querySelector(".icon.moon").addEventListener("click", function () {
-	document.querySelectorAll("body, .disk").forEach(element => element.classList.toggle("dark"))
-})
-
-document.querySelector(".icon.hash").addEventListener("click", function () {
+nodes.slider.onchange = function () {
+	new Game(this.value)
+}
+nodes.slider.oninput = function () {
+	nodes.infoText[1].textContent = this.value
+}
+nodes.options[0].onclick = function () {
 	document.querySelectorAll(".icon.hash, .disk").forEach(element => element.classList.toggle("show-text"))
-})
+}
+nodes.options[1].onclick = function () {
+	document.querySelectorAll("body, .disk").forEach(element => element.classList.toggle("dark"))
+}
 
-startNewGame(4)
+new Game(4)

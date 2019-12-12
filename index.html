@@ -6,21 +6,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<link rel="stylesheet" href="./src/index.css" />
-	<title>Tower of Hanoi (partner project)</title>
+	<link rel="canonical" href="">
+	<title>Tower of Hanoi</title>
 </head>
 
 <body>
 	<main class="content-container">
-		<section class="set" id="start"></section>
-		<section class="set" id="offset"></section>
-		<section class="set" id="end"></section>
+		<section class="tower" id="start"></section>
+		<section class="tower" id="offset"></section>
+		<section class="tower" id="end"></section>
 	</main>
 	<aside class="info-options">
 		<input type="range" min="4" max="12" value="4" />
 		<section>
 			<div class="info">
-				<div class="moves">moves: <span class="count"></span></div>
-				<div class="disks">disks: <span class="count"></span></div>
+				<div class="moves text">moves: <span class="count"></span></div>
+				<div class="disks text">disks: <span class="count"></span></div>
 			</div>
 			<div class="options">
 				<div class="icon hash"></div>
