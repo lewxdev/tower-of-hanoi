@@ -5,11 +5,11 @@ var VERSION = "v.1.2"
 var CACHE_NAME = APP_PREFIX + VERSION
 // Add URL you want to cache in this list.
 var URLS = [
-	"./",				// If you have separate JS/CSS files,
-	"./index.html",	// add path to those files here
-	"./src",
-	"./src/index.css",
-	"./src/index.js"
+	"/tower-of-hanoi",				// If you have separate JS/CSS files,
+	"/tower-of-hanoi/index.html",		// add path to those files here
+	"/tower-of-hanoi/src",
+	"/tower-of-hanoi/src/index.css",
+	"/tower-of-hanoi/src/index.js"
 ]
 
 // Respond with cached resources
@@ -17,10 +17,12 @@ self.addEventListener("fetch", function (event) {
 	console.log("fetch request: " + event.request.url)
 	event.respondWith(
 		caches.match(event.request).then(function (request) {
-			if (request) { // if cache is available, respond with cache
+			// if cache is available, respond with cache
+			if (request) {
 				console.log("responding with cache: " + event.request.url)
 				return request
-			} else {       // if there are no cache, try fetching request
+			// if there are no cache, try fetching request
+			} else {
 				console.log("file is not cached, fetching: " + event.request.url)
 				return fetch(event.request)
 			}
