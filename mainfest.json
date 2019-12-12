@@ -1,0 +1,36 @@
+{
+	"name": "Tower of Hanoi",
+	"short_name": "toh",
+	"icons": [
+		{
+			"src": "/app/icons/icon_128.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "/app/icons/icon_144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "/app/icons/icon_152.png",
+			"sizes": "152x152",
+			"type": "image/png"
+		},
+		{
+			"src": "/app/icons/icon_196.png",
+			"sizes": "196x196",
+			"type": "image/png"
+		},
+		{
+			"src": "/app/icons/icon_512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"background_color": "#FFFFFF",
+	"theme_color": "#FFFFFF"
+}

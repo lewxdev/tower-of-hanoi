@@ -81,9 +81,12 @@ nodes.slider.oninput = function () {
 	nodes.infoText[1].textContent = this.value
 }
 nodes.options[0].onclick = function () {
-	document.querySelectorAll(".icon.hash, .disk").forEach(element => element.classList.toggle("show-text"))
+	new Game(parseInt(nodes.infoText[1].textContent))
 }
 nodes.options[1].onclick = function () {
+	document.querySelectorAll(".icon.hash, .disk").forEach(element => element.classList.toggle("show-text"))
+}
+nodes.options[2].onclick = function () {
 	document.querySelectorAll("body, .disk").forEach(element => element.classList.toggle("dark"))
 }
 

@@ -3,6 +3,7 @@
 	--tower-width: 90px;
 	--disk-color: #8cd1da;
 	--dark-gray: #3a3a3a;
+	--hover-gray: #00000010;
 }
 
 .dark {
@@ -39,7 +40,8 @@ main.content-container {
 }
 
 .tower:hover {
-	background-color: #00000010;
+	background-color: var(--hover-gray);
+	cursor: pointer;
 }
 
 .disk {
@@ -91,18 +93,28 @@ main.content-container {
 	right: 0;
 }
 
-.options .icon {
+.icon {
+	background: center/60% no-repeat;
+	border-radius: 50%;
 	height: 36px;
 	width: 36px;
-	cursor: pointer;
 }
 
-.icon.moon {
-	background: url("./svg/moon-icon.svg") center/80% no-repeat;
+.icon:hover {
+	cursor: pointer;
+	background-color: var(--hover-gray);
+}
+
+.icon.reset {
+	background-image: url("./svg/reset-icon.svg");
 }
 
 .icon.hash {
-	background: url("./svg/hash-icon.svg") center/80% no-repeat;
+	background-image: url("./svg/hash-icon.svg");
+}
+
+.icon.moon {
+	background-image: url("./svg/moon-icon.svg");
 }
 
 input[type=range] {
