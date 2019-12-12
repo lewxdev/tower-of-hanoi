@@ -1,10 +1,10 @@
 // Identifier for this app (this needs to be consistent across every cache update)
-const APP_PREFIX = "TowerOfHanoi_"
+var APP_PREFIX = "TowerOfHanoi_"
 // Version of the offline cache (change this value everytime you want to update cache)
-const VERSION = "v1.0"
-const CACHE_NAME = APP_PREFIX + VERSION
+var VERSION = "v1.0"
+var CACHE_NAME = APP_PREFIX + VERSION
 // Add URL you want to cache in this list.
-const URLS = [                            
+var URLS = [                            
 	"/tower-of-hanoi/",
 	"/tower-of-hanoi/index.html",
 	"/tower-of-hanoi/src/",
@@ -58,7 +58,7 @@ self.addEventListener("activate", function (event) {
 
 			return Promise.all(keyList.map(function (key, i) {
 				if (cacheWhitelist.indexOf(key) === -1) {
-					console.log("deleting cache : " + keyList[i])
+					console.log("deleting cache: " + keyList[i])
 					return caches.delete(keyList[i])
 				}
 			}))
