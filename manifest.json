@@ -1,7 +1,7 @@
 {
 	"name": "Tower of Hanoi",
 	"short_name": "Hanoi",
-	"start_url": "https://lewxdev.gitlab.io/tower-of-hanoi/",
+	"start_url": ".",
 	"display": "standalone",
 	"background_color": "#fff",
 	"description": "A minimal time-passing implementation of the tower of hanoi game",
