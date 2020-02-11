@@ -1,7 +1,7 @@
 {
 	"name": "Tower of Hanoi",
 	"short_name": "Hanoi",
-	"start_url": ".",
+	"start_url": "./tower-of-hanoi/",
 	"display": "standalone",
 	"background_color": "#fff",
 	"description": "A minimal time-passing implementation of the tower of hanoi game",
