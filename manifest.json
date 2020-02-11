@@ -1,6 +1,10 @@
 {
 	"name": "Tower of Hanoi",
 	"short_name": "Hanoi",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#fff",
+	"description": "A minimal time-passing implementation of the tower of hanoi game",
 	"icons": [
 		{
 			"src": "src/app/icons/icon_192.png",
@@ -12,10 +16,5 @@
 			"sizes": "512x512",
 			"type": "image/png"
 		}
-	],
-	"start_url": "/",
-	"display": "standalone",
-	"orientation": "portrait",
-	"background_color": "#FFFFFF",
-	"theme_color": "#FFFFFF"
+	]
 }

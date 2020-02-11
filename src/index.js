@@ -62,6 +62,7 @@ nodes.towers.forEach(tower => {
 
 		if (nodes.towers[2].childElementCount == diskNodes.count) {
 			alert("You Win!")
+			nodes.slider.value = `${diskNodes.count + 1}`
 			new Game(diskNodes.count + 1)
 		}
 	}
@@ -88,6 +89,8 @@ nodes.options[1].onclick = function () {
 }
 nodes.options[2].onclick = function () {
 	document.querySelectorAll("body, .disk").forEach(element => element.classList.toggle("dark"))
+	document.querySelector("meta[name=theme-color]").setAttribute("content",
+		document.body.classList.contains("dark") ? "#0e0e0e" : "#ffffff");
 }
 
 new Game(4)
