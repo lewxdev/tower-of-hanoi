@@ -35,9 +35,10 @@
 	</aside>
 	<script src="./src/index.js"></script>
 	<script>
-		if ("serviceWorker" in navigator) {
+		if ("serviceWorker" in navigator)
 			navigator.serviceWorker.register("sw.js")
-		}
+				.then(registration =>
+					console.log(`Registered sw.js @${registration.scope}`))
 	</script>
 </body>
 
