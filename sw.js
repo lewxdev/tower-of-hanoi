@@ -11,17 +11,18 @@ const staticAssets = [
 	"/src/svg/reset-icon.svg",
 ]
 
-self.addEventListener("install", async event => {
-	const cache = await caches.open(cacheName)
-	await cache.addAll(staticAssets)
-	return self.skipWaiting()
-})
+self.addEventListener("install", () =>
+	caches.open(cacheName).then((cache) => cache.addAll(staticAssets))
+)
 
-self.addEventListener("activate", event => self.clients.claim())
+self.addEventListener("activate", () => this.clients.claim())
 
-self.addEventListener("fetch", async event => {
+self.addEventListener("fetch", event => {
 	const { request } = event
 	const url = new URL(request.url)
+
+	console.log(`Fetched: ${url}`)
+	console.log("Event: ", event)
 
 	if (url.origin === location.origin)
 		event.respondWith(cacheFirst(request))
