@@ -31,13 +31,13 @@ self.addEventListener("fetch", async event => {
 async function cacheFirst(request) {
 	const cache = await caches.open(cacheName)
 	const cached = await cache.match(request)
-	return cached || fetch(request, { mode: "same-origin" })
+	return cached || fetch(request, { mode: "no-cors" })
 }
 
 async function networkAndCache(request) {
 	const cache = await caches.open(cacheName)
 	try {
-		const fresh = await fetch(request, { mode: "same-origin" })
+		const fresh = await fetch(request, { mode: "no-cors" })
 		await cache.put(request, fresh.clone())
 		return fresh
 	}
