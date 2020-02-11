@@ -10,7 +10,6 @@
 	<link rel="apple-touch-icon" href="./src/app/icons/icon_192.png">
 	<link rel="stylesheet" href="./src/index.css" />
 	<link rel="manifest" href="./manifest.json" />
-	<base href="./">
 	<title>Tower of Hanoi</title>
 </head>
 
@@ -37,7 +36,7 @@
 	<script src="./src/index.js"></script>
 	<script>
 		if ("serviceWorker" in navigator) {
-			navigator.serviceWorker.register("./sw.js", { scope: "./" })
+			navigator.serviceWorker.register("/sw.js", { scope: "./" })
 		}
 	</script>
 </body>
