@@ -1,14 +1,14 @@
 const cacheName = "hanoi_v1.0"
 const staticAssets = [
-	"/tower-of-hanoi/",
-	"/tower-of-hanoi/index.html",
-	"/tower-of-hanoi/src",
-	"/tower-of-hanoi/src/index.css",
-	"/tower-of-hanoi/src/index.js",
-	"/tower-of-hanoi/src/svg",
-	"/tower-of-hanoi/src/svg/hash-icon.svg",
-	"/tower-of-hanoi/src/svg/moon-icon.svg",
-	"/tower-of-hanoi/src/svg/reset-icon.svg",
+	"./",
+	"./index.html",
+	"./src",
+	"./src/index.css",
+	"./src/index.js",
+	"./src/svg",
+	"./src/svg/hash-icon.svg",
+	"./src/svg/moon-icon.svg",
+	"./src/svg/reset-icon.svg",
 ]
 
 self.addEventListener("install", async event => {
