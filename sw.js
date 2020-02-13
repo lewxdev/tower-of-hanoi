@@ -1,4 +1,4 @@
-const CACHE_NAME = "hanoi_v1.0"
+const CACHE_NAME = "hanoi_v1.1"
 const STATIC_ASSETS = [
 	"index.html",
 	"src/index.css",
@@ -8,15 +8,16 @@ const STATIC_ASSETS = [
 	"src/svg/reset-icon.svg"
 ]
 
-self.addEventListener("install", event => {
-	event.waitUntil(
-		caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
+self.oninstall = event =>
+	event.waitUntil(caches.open(CACHE_NAME)
+		.then(cache =>
+			cache.addAll(STATIC_ASSETS)
+		)
 	)
-})
 
-self.addEventListener("fetch", event => {
-	event.respondWith(
-		caches.match(event.request)
-			.then(response => response || fetch(event.request))
+self.onfetch = event =>
+	event.respondWith(caches.match(event.request)
+		.then(response =>
+			response || fetch(event.request)
+		)
 	)
-})

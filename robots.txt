@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /src/*.*
-Disallow: /src/svg/
-Disallow: /.sw.js
-Disallow: /.*

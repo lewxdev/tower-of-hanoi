@@ -1,6 +1,5 @@
 :root {
 	--content-width: 325px;
-	--tower-width: 90px;
 	--disk-color: #8cd1da;
 	--dark-gray: #3a3a3a;
 	--hover-gray: #00000010;
@@ -30,10 +29,10 @@ main.content-container {
 }
 
 .tower {
-	height: fit-content;
 	width: var(--tower-width);
 	border-bottom: solid var(--dark-gray) 2px;
 	display: flex;
+	flex: 0.3;
 	flex-direction: column-reverse;
 	align-items: center;
 	padding: 7px 0;
