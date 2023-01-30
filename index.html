@@ -1,47 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="language" content="English" />
+    <meta name="theme-color" content="#f4f4f5" />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="theme-color" content="#ffffff" />
-	<meta name="description" content="A minimal time-passing implementation of the tower of hanoi game" />
-	<link rel="shortcut icon" href="./src/app/icons/icon.png" type="image/x-icon">
-	<link rel="apple-touch-icon" href="./src/app/icons/icon_192.png">
-	<link rel="stylesheet" href="./src/index.css" />
-	<link rel="manifest" href="./manifest.json" />
-	<title>Tower of Hanoi</title>
-</head>
+    <meta name="title" content="Tower of Hanoi" />
+    <meta name="description" content="Unleash your skills with this free online, mobile-friendly, minimal Tower of Hanoi game. Can you solve each puzzle in the least number of moves?" />
+    <meta name="keywords" content="Tower of Hanoi, game, puzzle, puzzle game, strategy game, web game, HTML5 game, free online game, free game, free mobile game" />
+    <title>Tower of Hanoi</title>
 
-<body>
-	<main class="content-container">
-		<section class="tower" id="start"></section>
-		<section class="tower" id="offset"></section>
-		<section class="tower" id="end"></section>
-	</main>
-	<aside class="info-options">
-		<input id="disk-slider" type="range" min="4" max="12" value="4" />
-		<section>
-			<div class="info">
-				<div class="moves text">moves: <span class="count"></span></div>
-				<div class="disks text">disks: <span class="count"></span></div>
-			</div>
-			<div class="options">
-				<div class="icon reset"></div>
-				<div class="icon hash"></div>
-				<div class="icon moon"></div>
-			</div>
-		</section>
-	</aside>
-	<script src="./src/index.js"></script>
-	<script>
-		if ("serviceWorker" in navigator)
-			navigator.serviceWorker.register("./sw.js")
-				.then(registration =>
-					console.log(`Registered sw.js @${registration.scope}`)
-				)
-	</script>
-</body>
+    <!-- Maskable icons generated with Maskable.app: https://maskable.app/editor -->
+    <link rel="apple-touch-icon" href="/icons/apple-touch-180.png" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="mask-icon" href="/icons/mask.svg" color="#da69c1" />
+    <link rel="manifest" href="/manifest.json" />
 
+    <!-- Odibee Sans: https://fonts.google.com/specimen/Odibee+Sans -->
+    <!-- Inter: https://fonts.google.com/specimen/Inter -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Odibee+Sans&family=Inter&display=swap" />
+
+    <script defer src="/src/index.tsx" type="module"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
