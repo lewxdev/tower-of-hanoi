@@ -30,5 +30,8 @@
         "alwaysTryTypes": true
       }
     }
+  },
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "error"
   }
 }
