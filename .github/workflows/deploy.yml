@@ -1,0 +1,76 @@
+name: CI/CD
+
+# helpful content:
+# https://dev.to/dyarleniber/setting-up-a-ci-cd-workflow-on-github-actions-for-a-react-app-with-github-pages-and-codecov-4hnp
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+concurrency:
+  group: deploy/pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialize workflow runner
+      - name: Checkout repository 🔎
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment ⚙️
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Cache dependencies 🫙
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles("**/package-lock.json") }}
+
+      - name: Install dependencies 📦
+        run: npm ci
+
+      # Run quality checks
+      - name: Run tests 🧪
+        run: npm test
+
+      - name: Lint codebase ✍️
+        run: npm run lint
+
+      # Build
+      - name: Build static app 🏗️
+        run: npm run build
+
+      - name: Upload artifact 🔄
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "dist"
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v1
