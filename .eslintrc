@@ -1,0 +1,40 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    // learn more: https://github.com/jsx-eslint/eslint-plugin-react#installation
+    "plugin:react/recommended",
+    // This disables rules relevant to the new JSX transform as of React 17+
+    // learn more: https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform
+    "plugin:react/jsx-runtime",
+    // learn more: https://github.com/import-js/eslint-plugin-import#installation
+    "plugin:import/recommended",
+    // learn more: https://typescript-eslint.io/getting-started
+    "plugin:@typescript-eslint/recommended",
+    // `eslint-config-prettier` disables formatting rules that Prettier is responsible for.
+    // This should ALWAYS be last so it can overwrite the preceding rules
+    // learn more: https://github.com/prettier/eslint-config-prettier#installation
+    "prettier"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  },
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "error"
+  }
+}
