@@ -1,4 +1,7 @@
 {
+  "env": {
+    "node": true
+  },
   "extends": [
     "eslint:recommended",
     // learn more: https://github.com/jsx-eslint/eslint-plugin-react#installation

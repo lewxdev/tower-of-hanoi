@@ -1,3 +1,13 @@
+import BottomBar from "./BottomBar";
+import Game from "./Game";
+import Header from "./Header";
+
 export default function App() {
-  return <h1>Tower of Hanoi</h1>;
+  return (
+    <>
+      <Header />
+      <Game />
+      <BottomBar />
+    </>
+  );
 }
