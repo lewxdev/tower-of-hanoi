@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD Pipeline
 
 # helpful content:
 # https://dev.to/dyarleniber/setting-up-a-ci-cd-workflow-on-github-actions-for-a-react-app-with-github-pages-and-codecov-4hnp
@@ -8,21 +8,20 @@ on:
     branches:
       - main
   pull_request:
-    branches:
-      - main
 
   workflow_dispatch:
 
 concurrency:
-  group: deploy/pages
+  group: ci-cd
   cancel-in-progress: true
 
 jobs:
   build:
+    name: Build and Run Quality Checks
     runs-on: ubuntu-latest
 
     steps:
-      # Initialize workflow runner
+      # Initialize workflow runner environment
       - name: Checkout repository 🔎
         uses: actions/checkout@v3
 
@@ -34,14 +33,14 @@ jobs:
       - name: Cache dependencies 🫙
         uses: actions/cache@v3
         with:
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: |
             **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies 📦
         run: npm ci
 
-      # Run quality checks
+      # Run code quality checks
       - name: Run tests 🧪
         run: npm test
 
@@ -53,24 +52,26 @@ jobs:
         run: npm run build
 
       - name: Upload artifact 🔄
+        if: ${{ github.action_name == 'push' }}
         uses: actions/upload-pages-artifact@v1
         with:
           path: "dist"
 
   deploy:
+    name: Deploy to GitHub Pages
+    if: ${{ github.action_name == 'push' }}
     needs: build
-
-    permissions:
-      pages: write
-      id-token: write
+    runs-on: ubuntu-latest
 
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pages: write
 
     steps:
-      - name: Deploy to Pages 🚀
+      - name: Deploy live site 🚀
         id: deployment
         uses: actions/deploy-pages@v1
