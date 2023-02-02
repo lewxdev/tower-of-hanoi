@@ -1,13 +1,20 @@
-name: CI/CD Pipeline
+# helpful resources:
+# - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-when-a-pull-request-merges
+# - https://dev.to/dyarleniber/setting-up-a-ci-cd-workflow-on-github-actions-for-a-react-app-with-github-pages-and-codecov-4hnp
+# - https://codeburst.io/fundamentals-of-github-actions-d35dc3102447
 
-# helpful content:
-# https://dev.to/dyarleniber/setting-up-a-ci-cd-workflow-on-github-actions-for-a-react-app-with-github-pages-and-codecov-4hnp
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
   pull_request:
+    types:
+      - closed
+      - opened
+      - reopened
+      - synchronize
 
   workflow_dispatch:
 
@@ -52,14 +59,16 @@ jobs:
         run: npm run build
 
       - name: Upload artifact 🔄
-        if: ${{ github.action_name == 'push' }}
+        if: |
+          github.event_name == 'push' || github.event.pull_request.merged == true
         uses: actions/upload-pages-artifact@v1
         with:
           path: "dist"
 
   deploy:
     name: Deploy to GitHub Pages
-    if: ${{ github.action_name == 'push' }}
+    if: |
+      github.event_name == 'push' || github.event.pull_request.merged == true
     needs: build
     runs-on: ubuntu-latest
 
