@@ -8,6 +8,7 @@ import {
   selectGameSelectableTowers,
   selectGameSelectedTowerIndex
 } from "@tower-of-hanoi/redux/slices/game";
+import { selectUiIsShowingIndices } from "@tower-of-hanoi/redux/slices/ui";
 
 interface Props {
   children: number[];
@@ -15,9 +16,9 @@ interface Props {
 }
 
 const padding = {
-  0: "sm:pr-6 px-3",
-  1: "sm:px-3 px-3",
-  2: "sm:pl-6 px-3"
+  0: "sm:pr-6 px-2",
+  1: "sm:px-3 px-2",
+  2: "sm:pl-6 px-2"
 };
 
 export default function Tower({ children, towerIndex }: Props) {
@@ -25,6 +26,7 @@ export default function Tower({ children, towerIndex }: Props) {
   const diskCount = useSelector(selectGameDiskCount);
   const selectableTowers = useSelector(selectGameSelectableTowers);
   const selectedTowerIndex = useSelector(selectGameSelectedTowerIndex);
+  const isShowingIndices = useSelector(selectUiIsShowingIndices);
 
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [shouldOffsetDisk, setShouldOffsetDisk] = useState(false);
@@ -49,22 +51,24 @@ export default function Tower({ children, towerIndex }: Props) {
       onMouseLeave={() => !isMobile && setIsMouseOver(false)}
     >
       {children.map((diskId, diskIndex) => {
+        const canStyleDisk = diskIndex === 0;
         const getWidthDiff = (minWidth: number) =>
           (minWidth / diskCount) * (diskCount - diskId);
 
-        const canStyleDisk = diskIndex === 0;
         return (
           <div
+            data-disk-id={diskId}
             className={clsx(
-              "my-1.5 h-12 w-[var(--width)] rounded-full bg-charcoal-500 bg-[length:400%_400%] transition-[margin-bottom] sm:h-16 sm:w-[var(--sm-width)]",
+              "my-1.5 flex h-12 w-[var(--width)] items-center rounded-full bg-charcoal-500 bg-[length:400%_400%] transition-[margin-bottom] before:m-4 before:inline-block before:text-lg before:font-bold before:text-charcoal-100 before:content-[attr(data-disk-id)] sm:h-16 sm:w-[var(--sm-width)] before:sm:m-6",
               shouldOffsetDisk && canStyleDisk && "mb-6 sm:mb-8",
               isSelected &&
                 canStyleDisk &&
-                "animate-breathing bg-gradient-to-r from-pink to-blue"
+                "animate-breathing bg-gradient-to-r from-pink to-blue",
+              !isShowingIndices && "before:hidden"
             )}
             key={diskId}
             style={{
-              "--sm-width": `calc(100% - ${getWidthDiff(100)}px)`,
+              "--sm-width": `calc(100% - ${getWidthDiff(90)}px)`,
               "--width": `calc(100% - ${getWidthDiff(60)}px)`
             }}
           />

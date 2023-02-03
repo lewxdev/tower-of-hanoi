@@ -6,6 +6,10 @@ import {
   selectGameMoveCount,
   selectGameScore
 } from "@tower-of-hanoi/redux/slices/game";
+import {
+  selectUiIsShowingIndices,
+  uiIsShowingIndicesToggle
+} from "@tower-of-hanoi/redux/slices/ui";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -13,6 +17,7 @@ export default function Header() {
   const minMoveCount = useSelector(selectGameMinMoveCount);
   const moveCount = useSelector(selectGameMoveCount);
   const score = useSelector(selectGameScore);
+  const isShowingIndices = useSelector(selectUiIsShowingIndices);
 
   return (
     <header className="grid select-none grid-cols-[1fr_auto] py-6 text-charcoal-500 max-sm:py-4">
@@ -34,12 +39,15 @@ export default function Header() {
               reset
             </span>
           </h4>
-          <h4 className="group mt-3">
+          <h4
+            className="group mt-3"
+            onClick={() => dispatch(uiIsShowingIndicesToggle())}
+          >
             <span className="material-symbols-rounded align-middle">
               numbers
             </span>
             <span className="ml-2 text-charcoal-400 group-hover:text-charcoal-500">
-              show indices
+              {isShowingIndices ? "hide" : "show"} indices
             </span>
           </h4>
         </div>

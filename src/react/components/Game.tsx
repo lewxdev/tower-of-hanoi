@@ -33,7 +33,7 @@ export default function Game() {
   }, []);
 
   return (
-    <div className="rounded-t-3xl bg-charcoal-100 px-4 py-6 sm:mx-6 sm:mb-6 sm:rounded-3xl sm:px-8 sm:py-12">
+    <div className="rounded-t-3xl bg-charcoal-100 px-2 py-4 sm:mx-6 sm:mb-6 sm:rounded-3xl sm:px-8 sm:py-12">
       <div className="grid h-full grid-cols-[repeat(3,minmax(0,1fr))] justify-center sm:grid-cols-[repeat(3,minmax(0,13.5em))]">
         {towers.map((towerChildren, towerIndex) => (
           <Tower key={towerIndex} towerIndex={towerIndex as 0 | 1 | 2}>
