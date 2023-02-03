@@ -13,8 +13,9 @@ describe("'game/initialize' action type", () => {
     expect(nextState).toStrictEqual(
       expect.objectContaining<GameState>({
         diskCount,
+        minMoveCount: 255,
         moveCount: 0,
-        scoreMultiplier: 0,
+        score: 0,
         selectableTowers: [0],
         selectedTowerIndex: null,
         towers: [[1, 2, 3, 4, 5, 6, 7, 8], [], []]
@@ -30,8 +31,9 @@ describe("'game/initialize' action type", () => {
     expect(nextState).toStrictEqual(
       expect.objectContaining<GameState>({
         diskCount,
+        minMoveCount: 31,
         moveCount: 0,
-        scoreMultiplier: 0,
+        score: 0,
         selectableTowers: [0],
         selectedTowerIndex: null,
         towers: [[1, 2, 3, 4, 5], [], []]

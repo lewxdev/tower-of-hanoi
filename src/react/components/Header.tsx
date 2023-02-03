@@ -2,14 +2,17 @@ import { useDispatch, useSelector } from "@tower-of-hanoi/redux/hooks";
 import {
   gameInitialize,
   selectGameDiskCount,
-  selectGameMoveCount
+  selectGameMinMoveCount,
+  selectGameMoveCount,
+  selectGameScore
 } from "@tower-of-hanoi/redux/slices/game";
 
 export default function Header() {
   const dispatch = useDispatch();
-
-  const moveCount = useSelector(selectGameMoveCount);
   const diskCount = useSelector(selectGameDiskCount);
+  const minMoveCount = useSelector(selectGameMinMoveCount);
+  const moveCount = useSelector(selectGameMoveCount);
+  const score = useSelector(selectGameScore);
 
   return (
     <header className="grid select-none grid-cols-[1fr_auto] py-6 text-charcoal-500 max-sm:py-4">
@@ -43,16 +46,27 @@ export default function Header() {
 
         {/* Stats */}
         <div>
-          <h5 className="text-2xl font-bold leading-tight">{"00:00:00"}</h5>
-          <h4 className="whitespace-nowrap leading-none">
+          <h4 className="whitespace-nowrap pl-0.5 leading-none">
+            <span className="text-xl font-bold">{diskCount}</span>
+            <span className="text-charcoal-400"> disks</span>
+          </h4>
+          <h4 className="whitespace-nowrap pl-0.5 leading-none">
             <span className="text-xl font-bold">
-              {moveCount} / {Math.pow(2, diskCount) - 1}
+              {moveCount} / {minMoveCount}
             </span>
             <span className="text-charcoal-400"> moves</span>
           </h4>
           <h4 className="whitespace-nowrap leading-none">
-            <span className="text-xl font-bold">{"0"}</span>
-            <span className="text-charcoal-400"> score</span>
+            {Array.from(Array(score), (_, key) => (
+              <span className="material-symbols-rounded symbol-fill" key={key}>
+                star
+              </span>
+            ))}
+            {Array.from(Array(3 - score), (_, key) => (
+              <span className="material-symbols-rounded" key={key}>
+                star
+              </span>
+            ))}
           </h4>
         </div>
       </div>
