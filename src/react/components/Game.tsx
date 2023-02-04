@@ -6,9 +6,13 @@ import {
   selectGameTowers
 } from "@tower-of-hanoi/redux/slices/game";
 import { useEffect } from "react";
+import { useModalContext } from "./ModalProvider";
 import Tower from "./Tower";
+import sample from "lodash.sample";
 
 export default function Game() {
+  const [setModalOptions] = useModalContext();
+
   const dispatch = useDispatch();
   const towers = useSelector(selectGameTowers);
   const diskCount = useSelector(selectGameDiskCount);
@@ -18,8 +22,18 @@ export default function Game() {
   useEffect(() => {
     if (!hasWon) return;
 
-    if (confirm("You win!")) dispatch(gameInitialize(diskCount + 1));
-    else dispatch(gameInitialize());
+    setModalOptions({
+      content: {
+        title: "You win! 🎉",
+        details: sample(praise) ?? "well that was weird"
+      },
+      onConfirm() {
+        dispatch(gameInitialize(diskCount + 1));
+      },
+      onClose() {
+        dispatch(gameInitialize());
+      }
+    });
   }, [diskCount, hasWon]);
 
   useEffect(() => {
@@ -44,3 +58,14 @@ export default function Game() {
     </div>
   );
 }
+
+const praise = [
+  "way to go, rock star!",
+  "okay, that's pretty nice",
+  "now you're just showing off",
+  "you just don't stop, do you?",
+  "and I mean that in the best way",
+  "quit your day job already",
+  "you're honestly way too good at this",
+  "it's funny, I really don't know how well you did but I still feel obligated to give you compliments"
+];
